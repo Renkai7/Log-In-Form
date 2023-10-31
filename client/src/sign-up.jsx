@@ -22,7 +22,6 @@ function SignUp() {
 			{userName ? (
 				<div>
 					<h1>Welcome {userName}</h1>
-					{/* Add your sign-out button here */}
 				</div>
 			) : (
 				<GoogleSignIn onSignIn={handleSignIn} onError={handleError} />

@@ -18,8 +18,18 @@ function GoogleSignUp({ onSignIn, onError }) {
 				email: user.email,
 			};
 
-			await axios.post("http://localhost:3001/api/register", userData);
-			onSignIn(userData.firstName);
+			const response = await axios.post(
+				"http://localhost:3001/api/register",
+				userData
+			);
+
+			if (response.data.error) {
+				// User exists in the database
+				onError(response.data.error);
+			} else {
+				// User not found in the database, handle success
+				onSignIn(user.displayName);
+			}
 		} catch (error) {
 			console.error(error);
 			onError(error.message); // Pass error message to parent component
